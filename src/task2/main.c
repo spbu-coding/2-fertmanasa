@@ -1,10 +1,10 @@
-#include<stdio.h>
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <limits.h>
 
 #define MAX_ELEMENTS_IN_ARRAY 100
-#define error(...) (frpintf(stderr, __VA_ARGS__))
+#define error(...) (fprintf(stderr, __VA_ARGS__))
 
 int read_array(int *array, size_t *array_size)
 {
@@ -101,11 +101,15 @@ void copy_array(int *dest, int const *src, size_t array_size)
     }
 }
 
+void bubblesort(int *array, int array_size);
+
+void swap (int *a, int *b);
+
 int main (int argv, char *argc[])
 {
     int from = INT_MIN;
     int to = INT_MAX;
-    int errortype = set_parameters_values(argv, **argc, *from, *to);
+    int errortype = set_parameters_values(argv, argc, &from, &to);
     if (errortype != 0)
     {
         return errortype;
@@ -136,7 +140,7 @@ int main (int argv, char *argc[])
         return -32767;
     }
     copy_array(new_array_2, new_array, new_array_size);
-    sort_array(new_array, new_array_size);
+    bubblesort(new_array, new_array_size);
     int swap_count = count_swap(new_array, new_array_2, new_array_size);
     free(array);
     free(new_array);
