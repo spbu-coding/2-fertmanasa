@@ -101,7 +101,7 @@ void copy_array(int *dest, int const *src, size_t array_size)
     }
 }
 
-void bubblesort(int *array, int array_size);
+void sort_array(int *array, int array_size);
 
 void swap (int *a, int *b);
 
@@ -140,7 +140,7 @@ int main (int argv, char *argc[])
         return -32767;
     }
     copy_array(new_array_2, new_array, new_array_size);
-    bubblesort(new_array, new_array_size);
+    sort_array(new_array, new_array_size);
     int swap_count = count_swap(new_array, new_array_2, new_array_size);
     free(array);
     free(new_array);
