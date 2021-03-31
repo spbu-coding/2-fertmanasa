@@ -6,12 +6,12 @@
 #define MAX_ELEMENTS_IN_ARRAY 100
 #define error(...) (fprintf(stderr, __VA_ARGS__))
 
-int read_array(int *array, size_t *array_size)
-{
+int read_array(int *array, size_t *array_size) {
     char div = ' ';
     size_t element_count = 0;
     while (div == ' ') {
-        if(scanf("%d%c", &array[element_count++], &div) < 2) {
+        if(scanf("%d%c", &array[element_count++], &div) < 2)
+        {
             error("Cannot read element");
             return -32767;
         }
@@ -20,8 +20,7 @@ int read_array(int *array, size_t *array_size)
     return 0;
 }
 
-int set_parameters_values(int argv, char **argc, int *from, int *to)
-{
+int set_parameters_values(int argv, char **argc, int *from, int *to) {
     if (argv < 2) {
         return -1;
     }
@@ -49,8 +48,7 @@ int set_parameters_values(int argv, char **argc, int *from, int *to)
     return 0;
 }
 
-size_t count_swap(int const *first_array, int const *second_array, size_t arrays_size)
-{
+size_t count_swap(int const *first_array, int const *second_array, size_t arrays_size) {
     size_t swap_count = 0;
     for (size_t i = 0; i < arrays_size; ++i) {
         if (first_array[i] != second_array[i]) {
@@ -60,8 +58,7 @@ size_t count_swap(int const *first_array, int const *second_array, size_t arrays
     return swap_count;
 }
 
-int create_new_array(int const *array, size_t array_size, int *new_array, size_t *new_size, int from, int to)
-{
+int create_new_array(int const *array, size_t array_size, int *new_array, size_t *new_size, int from, int to) {
     size_t new_element_count = 0;
     for (size_t i = 0; i < array_size; ++i) {
         if (array[i] > from && array[i] < to) {
@@ -94,24 +91,22 @@ int create_new_array(int const *array, size_t array_size, int *new_array, size_t
     return 0;
 }
 
-void copy_array(int *dest, int const *src, size_t array_size)
-{
-    for (size_t i = 0; i < array_size; ++i) {
+void copy_array(int *dest, int const *src, size_t array_size) {
+    for (size_t i = 0; i < array_size; ++i)
+    {
         dest[i] = src[i];
     }
 }
 
-void sort_array(int *array, int array_size);
+void bubblesort(int *array, int array_size);
 
 void swap (int *a, int *b);
 
-int main (int argv, char *argc[])
-{
+int main (int argv, char *argc[]) {
     int from = INT_MIN;
     int to = INT_MAX;
     int errortype = set_parameters_values(argv, argc, &from, &to);
-    if (errortype != 0)
-    {
+    if (errortype != 0) {
         return errortype;
     }
     size_t array_size = 0;
@@ -140,7 +135,7 @@ int main (int argv, char *argc[])
         return -32767;
     }
     copy_array(new_array_2, new_array, new_array_size);
-    sort_array(new_array, new_array_size);
+    bubblesort(new_array, new_array_size);
     int swap_count = count_swap(new_array, new_array_2, new_array_size);
     free(array);
     free(new_array);
